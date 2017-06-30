@@ -34,3 +34,19 @@ function drawCar() {
 }
 
 drawCar()
+
+window.addEventListener('keydown', function (event) {
+  switch (event.keyCode) {
+    case 38:  // up arrow
+      // do something
+      break
+    case 40:  // down arrow
+      // do something
+      break
+    case 37:  // left arrow
+      // do something
+      break
+    case 39:  // right arrow
+      // do something
+  }
+})

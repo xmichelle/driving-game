@@ -5,32 +5,36 @@ const $c = $canvas.getContext('2d')
 $canvas.width = window.innerWidth
 $canvas.height = window.innerHeight
 
+let x = 50
+let y = 100
+
 function drawCar() {
-  $c.fillRect(30, 30, 50, 30)
+  requestAnimationFrame(drawCar)
+  $c.clearRect(0, 0, $canvas.width, $canvas.height)
+
+  $c.fillRect(x, y, 50, 30)
 
   $c.beginPath()
-  $c.arc(40, 60, 7, 0, Math.PI, false)
+  $c.arc(x + 10, y + 30, 7, 0, Math.PI, false)
   $c.closePath()
-  $c.fillStyle = '#8B4513'
   $c.fill()
 
   $c.beginPath()
-  $c.arc(70, 60, 7, 0, Math.PI, false)
+  $c.arc(x + 40, y + 30, 7, 0, Math.PI, false)
   $c.closePath()
-  $c.fillStyle = '#8B4513'
   $c.fill()
 
   $c.beginPath()
-  $c.arc(40, 30, 7, 0, Math.PI, true)
+  $c.arc(x + 10, y, 7, 0, Math.PI, true)
   $c.closePath()
-  $c.fillStyle = '#8B4513'
   $c.fill()
 
   $c.beginPath()
-  $c.arc(70, 30, 7, 0, Math.PI, true)
+  $c.arc(x + 40, y, 7, 0, Math.PI, true)
   $c.closePath()
-  $c.fillStyle = '#8B4513'
   $c.fill()
+
+  x += 1
 }
 
 drawCar()

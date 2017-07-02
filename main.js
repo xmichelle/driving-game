@@ -3,8 +3,6 @@ const $carImage = document.createElement('img')
 $carImage.setAttribute('src', 'images/car.png')
 $carImage.classList.add('car')
 
-document.body.appendChild($carImage)
-
 class Car {
   constructor(direction, speed, location) {
     this.direction = direction
@@ -39,10 +37,26 @@ class Car {
   static start(car) {
     setInterval(function () {
       car.move()
-    }, 1000)
+    }, 30)
   }
 }
 
-const car = new Car('south', 5, [5, 5])
+const car1 = new Car('east', 5, [0, 0])
 
-Car.start(car)
+function moveCar(car) {
+  $carImage.style.left = car.location[0] + 'px'
+  $carImage.style.top = car.location[1] + 'px'
+}
+
+window.addEventListener('keydown', function (event) {
+  switch (event.keyCode) {
+    case 38:
+      Car.start(car1)
+      setInterval(function () {
+        moveCar(car1)
+      }, 0)
+      break
+  }
+})
+
+document.body.appendChild($carImage)

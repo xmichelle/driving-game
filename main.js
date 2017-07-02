@@ -1,36 +1,62 @@
 
-const $canvas = document.querySelector('canvas')
-const $c = $canvas.getContext('2d')
+const $carImage = document.createElement('img')
+$carImage.setAttribute('src', 'images/car.png')
+$carImage.classList.add('car')
 
-$canvas.width = window.innerWidth
-$canvas.height = window.innerHeight
+class Car {
+  constructor(direction, speed, location) {
+    this.direction = direction
+    this.speed = speed
+    this.location = location
+  }
 
-function drawCar() {
-  $c.fillRect(30, 30, 50, 30)
+  turn(direction) {
+    this.direction = direction
+  }
 
-  $c.beginPath()
-  $c.arc(40, 60, 7, 0, Math.PI, false)
-  $c.closePath()
-  $c.fillStyle = '#8B4513'
-  $c.fill()
+  accelerate(amount) {
+    this.speed += amount
+  }
 
-  $c.beginPath()
-  $c.arc(70, 60, 7, 0, Math.PI, false)
-  $c.closePath()
-  $c.fillStyle = '#8B4513'
-  $c.fill()
+  move() {
+    switch (this.direction) {
+      case 'north':
+        this.location[1] -= this.speed
+        break
+      case 'south':
+        this.location[1] += this.speed
+        break
+      case 'east':
+        this.location[0] += this.speed
+        break
+      case 'west':
+        this.location[0] -= this.speed
+    }
+  }
 
-  $c.beginPath()
-  $c.arc(40, 30, 7, 0, Math.PI, true)
-  $c.closePath()
-  $c.fillStyle = '#8B4513'
-  $c.fill()
-
-  $c.beginPath()
-  $c.arc(70, 30, 7, 0, Math.PI, true)
-  $c.closePath()
-  $c.fillStyle = '#8B4513'
-  $c.fill()
+  static start(car) {
+    setInterval(function () {
+      car.move()
+    }, 30)
+  }
 }
 
-drawCar()
+const car1 = new Car('east', 5, [0, 0])
+
+function moveCar(car) {
+  $carImage.style.left = car.location[0] + 'px'
+  $carImage.style.top = car.location[1] + 'px'
+}
+
+window.addEventListener('keydown', function (event) {
+  switch (event.keyCode) {
+    case 38:
+      Car.start(car1)
+      setInterval(function () {
+        moveCar(car1)
+      }, 0)
+      break
+  }
+})
+
+document.body.appendChild($carImage)

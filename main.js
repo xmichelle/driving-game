@@ -60,6 +60,22 @@ window.addEventListener('keydown', function (event) {
     case 16: // shift key
       Car.stop(car1)
       break
+    case 40: // down arrow
+      car1.direction = 'south'
+      // $carImage.style.transform = 'rotate(0.25turn)'
+      break
+    case 38: // up arrow
+      car1.direction = 'north'
+      // $carImage.style.transform = 'rotate(0.75turn)'
+      break
+    case 37: // left arrow
+      car1.direction = 'west'
+      // $carImage.style.transform = 'rotate(0.5turn)'
+      break
+    case 39: // right arrow
+      car1.direction = 'east'
+      // $carImage.style.transform = 'rotate(1turn)'
+      break
   }
 })
 

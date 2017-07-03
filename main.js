@@ -35,9 +35,12 @@ class Car {
   }
 
   static start(car) {
-    setInterval(function () {
-      car.move()
-    }, 30)
+    const interval = setInterval(() => car.move(), 30)
+    this.interval = interval
+  }
+
+  static stop(car) {
+    clearInterval(this.interval)
   }
 }
 
@@ -50,11 +53,12 @@ function moveCar(car) {
 
 window.addEventListener('keydown', function (event) {
   switch (event.keyCode) {
-    case 38:
+    case 32: // spacebar
       Car.start(car1)
-      setInterval(function () {
-        moveCar(car1)
-      }, 0)
+      setInterval(() => moveCar(car1), 0)
+      break
+    case 16: // shift key
+      Car.stop(car1)
       break
   }
 })
